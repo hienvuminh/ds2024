@@ -9,6 +9,6 @@ Students are expected to:
 Student Info
 =========================
 
-* Student Name: USTH ICT1
-* Student ID: Not-Vietnamese
+* Student Name: Vu Minh Hiển
+* Student ID: Bi12-154
 * Student Group ID: Not-for-now
