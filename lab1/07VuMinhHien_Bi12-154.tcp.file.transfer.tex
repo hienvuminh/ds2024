@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+\title{GAE}
+\author{Vu Minh Hien Bi12-154}
+\date{\today}
+
+\maketitle
+
+
+\maketitle
+
+
+
+\section{Important snippets}
+\begin{enumerate}
+    \item \textbf{Initialization of the Sudoku board:} The \texttt{\_\_init\_\_} method initializes the Sudoku board with a $9 \times 9$ grid filled with zeros.
+
+    \item \textbf{Printing the board:} The \texttt{print\_board} method prints the current state of the Sudoku board in a visually appealing format with appropriate row and column separators.
+
+    \item \textbf{Validity checks for moves:} Methods like \texttt{is\_valid\_row}, \texttt{is\_valid\_col}, and \texttt{is\_valid\_subgrid} check whether a move is valid based on Sudoku rules.
+
+    \item \textbf{Main game loop:} The \texttt{main} function sets up the game, generates a full Sudoku board, removes a certain number of cells to create the puzzle, and then enters a loop where the player can input their moves until the puzzle is solved.
+\end{enumerate}
+
+\section{How structure code}
+\begin{enumerate}
+    \item \textbf{Class Definition:} The code defines a \texttt{Sudoku} class, encapsulating all functionalities related to the Sudoku game.
+
+    \item \textbf{Methods for Generating and Solving Sudoku:} The \texttt{generate}, \texttt{solve}, and \texttt{generate\_full\_board} methods are placeholders for functionalities related to generating and solving Sudoku puzzles. Currently, they are empty and need to be implemented.
+
+    \item \textbf{Input and Output Handling:} The \texttt{print\_board} method handles the visual representation of the Sudoku board, while the \texttt{main} function takes user input for row, column, and number, checks the validity of the move, updates the board accordingly, and prints the updated board.
+
+    \item \textbf{Game Loop:} The main game loop in the \texttt{main} function keeps the game running until the puzzle is solved. Within this loop, the user is prompted to input their moves, and the board is updated accordingly.
+
+    \item \textbf{Conditional Check for Puzzle Completion:} The code checks if there are no zeros left on the board to determine if the puzzle has been solved, indicating that all cells have been filled correctly.
+\end{enumerate}
+
+\section{Code}
+\begin{lstlisting}[language=C++, caption=GAE C++ Code, label=lst:code]
+
+
+import random
+import numpy as np
+from copy import deepcopy
+
+class Sudoku:
+    def __init__(self):
+        self.board = [[0]*9 for _ in range(9)]
+
+    def generate(self):
+        pass 
+
+    def print_board(self):
+        for i in range(9):
+            if i % 3 == 0 and i != 0:
+                print("- " * 11)
+            for j in range(9):
+                if j % 3 == 0 and j != 0:
+                    print("|", end=" ")
+                print(self.board[i][j], end=" ")
+            print()
+
+    def is_valid_move(self, row, col, num):
+        return self.is_valid_row(row, num) and self.is_valid_col(col, num) and self.is_valid_subgrid(row - row % 3, col - col % 3, num)
+
+    def is_valid_row(self, row, num):
+        return num not in self.board[row]
+
+    def is_valid_col(self, col, num):
+        return all(row[col] != num for row in self.board)
+
+    def is_valid_subgrid(self, row, col, num):
+        for i in range(3):
+            for j in range(3):
+                if self.board[i + row][j + col] == num:
+                    return False
+        return True
+
+    def solve(self):
+        pass  
+
+    def generate_full_board(self):
+        pass  
+
+    def remove_cells(self, num_cells_to_remove):
+        pass  
+
+def main():
+    game = Sudoku()
+    game.generate_full_board()
+    game.remove_cells(50) 
+    game.print_board()
+
+    while True:
+        row = int(input("Enter row (1-9): ")) - 1
+        col = int(input("Enter column (1-9): ")) - 1
+        num = int(input("Enter number (1-9): "))
+
+        if game.is_valid_move(row, col, num):
+            game.board[row][col] = num
+            game.print_board()
+        else:
+            print("Invalid move. Try again.")
+
+        if all(0 not in row for row in game.board):
+            print("Congratulations! You solved the puzzle   .")
+            break
+
+if __name__ == "__main__":
+    main()
+
+\end{lstlisting}
+
+\end{document}
