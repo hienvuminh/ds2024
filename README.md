@@ -11,4 +11,5 @@ Student Info
 
 * Student Name: Vu Minh Hiển
 * Student ID: Bi12-154
-* Student Group ID: Not-for-now
+* Student Group ID: 02
+  
